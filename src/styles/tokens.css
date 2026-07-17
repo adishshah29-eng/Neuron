@@ -1,20 +1,20 @@
 :root {
   /* Neutrals */
-  --color-bg: #FAFAF9;
-  --color-bg-alt: #FFFFFF;
-  --color-text: #1A1D23;
-  --color-border: #E8E9ED;
+  --color-bg: #02040a;
+  --color-bg-alt: #0a1320;
+  --color-text: #f8fafc;
+  --color-border: #1e293b;
 
   /* Primary */
-  --color-primary: #1E3A5F;      /* deep indigo/blue */
-  --color-primary-dark: #14263F;
+  --color-primary: #94a3b8;      /* soft light blue/gray */
+  --color-primary-dark: #f8fafc; /* bright white for titles */
 
   /* Gradient */
-  --gradient-brand: linear-gradient(135deg, #1E3A5F 0%, #14B8A6 100%);
+  --gradient-brand: linear-gradient(135deg, #3b82f6 0%, #14B8A6 100%);
 
   /* CTA accent */
-  --color-cta: #FF6B4A;
-  --color-cta-hover: #E85A3B;
+  --color-cta: #14b8a6;
+  --color-cta-hover: #0d9488;
 
   /* Type scale */
   --font-base: 'Inter', -apple-system, sans-serif;

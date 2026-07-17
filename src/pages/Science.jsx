@@ -3,12 +3,12 @@ import publicationsData from '../data/publications.json';
 
 const Science = () => {
   return (
-    <div style={{ paddingTop: '80px', minHeight: '100vh', backgroundColor: 'var(--color-bg)' }}>
+    <div style={{ paddingTop: '80px', minHeight: '100vh', backgroundColor: 'transparent' }}>
       <div className="container" style={{ paddingBlock: '4rem' }}>
         <div style={{ textAlign: 'center', marginBottom: '5rem' }}>
           <span className="text-overline">Clinical Validation</span>
           <h1 style={{ color: 'var(--color-primary-dark)', marginBottom: '1rem', fontSize: '3.5rem' }}>The Science</h1>
-          <p style={{ fontSize: '1.25rem', color: '#4B5563', marginInline: 'auto' }}>
+          <p style={{ fontSize: '1.25rem', color: 'rgba(255,255,255,0.7)', marginInline: 'auto' }}>
             A Well-Documented Mechanism of Action
           </p>
         </div>
@@ -27,10 +27,10 @@ const Science = () => {
               <h3 style={{ fontSize: '1.25rem', marginBottom: '0.5rem', color: 'var(--color-text)' }}>
                 {pub.title}
               </h3>
-              <p style={{ fontSize: 'var(--fs-small)', color: '#718096', marginBottom: '1rem' }}>
+              <p style={{ fontSize: 'var(--fs-small)', color: 'rgba(255,255,255,0.5)', marginBottom: '1rem' }}>
                 {pub.authors}
               </p>
-              <p style={{ color: '#4A5568', marginBottom: '1.5rem', lineHeight: 1.6 }}>
+              <p style={{ color: 'rgba(255,255,255,0.8)', marginBottom: '1.5rem', lineHeight: 1.6 }}>
                 {pub.description}
               </p>
               <a href={pub.link} className="btn-primary" style={{ padding: '0.5rem 1rem', fontSize: '0.875rem' }}>

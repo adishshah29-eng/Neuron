@@ -11,7 +11,7 @@
 body {
   line-height: 1.5;
   -webkit-font-smoothing: antialiased;
-  background-color: var(--color-bg);
+  background-color: transparent; /* Let the global canvas show through */
   color: var(--color-text);
   font-family: var(--font-base);
 }
@@ -90,7 +90,7 @@ section {
 p {
   line-height: 1.7;
   max-width: 65ch; /* Optimal reading length */
-  color: #4B5563; /* Softer contrast for long text */
+  color: rgba(255, 255, 255, 0.7); /* Softer contrast for long text */
 }
 
 .text-overline {
@@ -111,11 +111,13 @@ p {
 }
 
 .bento-card {
-  background: white;
+  background: rgba(255, 255, 255, 0.02);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
   border-radius: var(--radius-lg);
   padding: 2.5rem;
-  border: 1px solid rgba(0,0,0,0.05);
-  box-shadow: var(--shadow-sm);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  box-shadow: var(--shadow-md);
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   display: flex;
   flex-direction: column;
@@ -124,18 +126,19 @@ p {
 
 .bento-card:hover {
   transform: translateY(-4px);
-  box-shadow: var(--shadow-xl);
-  border-color: rgba(20, 184, 166, 0.2);
+  box-shadow: var(--shadow-glow);
+  border-color: rgba(20, 184, 166, 0.3);
+  background: rgba(255, 255, 255, 0.04);
 }
 
 /* Glassmorphism / Dimensional Layering */
 .glass-panel {
-  background: rgba(255, 255, 255, 0.7);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  border: 1px solid rgba(255, 255, 255, 0.5);
+  background: rgba(10, 19, 32, 0.6);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
   border-radius: var(--radius-lg);
-  box-shadow: var(--shadow-md);
+  box-shadow: 0 0 30px rgba(0,0,0,0.5);
 }
 
 .avatar-container {

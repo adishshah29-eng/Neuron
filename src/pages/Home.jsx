@@ -5,7 +5,7 @@ import advisorsData from '../data/advisors.json';
 
 const Home = () => {
   return (
-    <div style={{ backgroundColor: 'var(--color-bg)' }}>
+    <div style={{ backgroundColor: 'transparent' }}>
       {/* Hero Section with 3D Background */}
       <section style={{ 
         position: 'relative', 
@@ -59,7 +59,7 @@ const Home = () => {
       </section>
 
       {/* Pillars Section */}
-      <section style={{ backgroundColor: 'var(--color-bg-alt)' }}>
+      <section style={{ backgroundColor: 'transparent' }}>
         <div className="container">
           <div style={{ textAlign: 'center', marginBottom: '4rem', maxWidth: '600px', marginInline: 'auto' }}>
             <span className="text-overline">The Technology</span>
@@ -95,7 +95,7 @@ const Home = () => {
       </section>
 
       {/* About Section */}
-      <section id="about" style={{ backgroundColor: 'var(--color-bg)' }}>
+      <section id="about" style={{ backgroundColor: 'transparent' }}>
         <div className="container">
           <div className="glass-panel" style={{ 
             display: 'grid', 
@@ -131,7 +131,7 @@ const Home = () => {
       </section>
 
       {/* Team Section */}
-      <section id="team" style={{ backgroundColor: 'var(--color-bg-alt)' }}>
+      <section id="team" style={{ backgroundColor: 'transparent' }}>
         <div className="container">
           <div style={{ textAlign: 'center', marginBottom: '4rem' }}>
             <span className="text-overline">Leadership</span>
@@ -152,7 +152,7 @@ const Home = () => {
       </section>
 
       {/* Advisors Section */}
-      <section style={{ backgroundColor: 'var(--color-bg)' }}>
+      <section style={{ backgroundColor: 'transparent' }}>
         <div className="container">
           <div style={{ textAlign: 'center', marginBottom: '4rem' }}>
             <span className="text-overline">Experts</span>
@@ -173,7 +173,7 @@ const Home = () => {
       </section>
 
       {/* Early Access Form */}
-      <section id="early-access" style={{ backgroundColor: 'var(--color-bg-alt)', paddingBlock: '8rem', position: 'relative', overflow: 'hidden' }}>
+      <section id="early-access" style={{ backgroundColor: 'transparent', paddingBlock: '8rem', position: 'relative', overflow: 'hidden' }}>
         {/* Decorative background glow */}
         <div style={{
           position: 'absolute',

@@ -327,10 +327,8 @@ const ParticleBrain = () => {
 
 const NeuralNetwork = () => {
   return (
-    <div style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', zIndex: 0, backgroundColor: '#02040a', overflow: 'hidden' }}>
+    <div style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', zIndex: 0, backgroundColor: 'transparent', overflow: 'hidden' }}>
       <Canvas camera={{ position: [0, 0, 22], fov: 60 }} style={{ position: 'absolute', top: 0, left: 0, zIndex: 2 }}>
-        <fog attach="fog" args={['#02040a', 15, 35]} />
-        <Stars radius={100} depth={50} count={3000} factor={4} saturation={0} fade speed={1} />
         <ParticleBrain />
       </Canvas>
       <div style={{
