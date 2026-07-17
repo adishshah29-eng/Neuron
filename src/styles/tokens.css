@@ -1,0 +1,48 @@
+:root {
+  /* Neutrals */
+  --color-bg: #FAFAF9;
+  --color-bg-alt: #FFFFFF;
+  --color-text: #1A1D23;
+  --color-border: #E8E9ED;
+
+  /* Primary */
+  --color-primary: #1E3A5F;      /* deep indigo/blue */
+  --color-primary-dark: #14263F;
+
+  /* Gradient */
+  --gradient-brand: linear-gradient(135deg, #1E3A5F 0%, #14B8A6 100%);
+
+  /* CTA accent */
+  --color-cta: #FF6B4A;
+  --color-cta-hover: #E85A3B;
+
+  /* Type scale */
+  --font-base: 'Inter', -apple-system, sans-serif;
+  --fs-hero: clamp(2.5rem, 5vw, 4.5rem);
+  --fs-h2: clamp(1.75rem, 3vw, 2.5rem);
+  --fs-h3: 1.25rem;
+  --fs-body: 1rem;
+  --fs-small: 0.875rem;
+
+  /* Spacing */
+  --space-section: clamp(4rem, 8vw, 8rem);
+  --container-max: 1280px;
+
+  /* UI UX Pro Max: Dimensional Layering */
+  --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+  --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+  --shadow-glow: 0 0 20px rgba(20, 184, 166, 0.4);
+  
+  --radius-sm: 0.5rem;
+  --radius-md: 1rem;
+  --radius-lg: 1.5rem;
+  --radius-full: 9999px;
+
+  /* Breakpoints */
+  --bp-sm: 480px;
+  --bp-md: 768px;
+  --bp-lg: 1024px;
+  --bp-xl: 1280px;
+}

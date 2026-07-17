@@ -1,0 +1,14 @@
+[
+  {
+    "id": 1,
+    "name": "Dr. Charles Rodenkirch",
+    "title": "Founder & CEO",
+    "image": "https://via.placeholder.com/200"
+  },
+  {
+    "id": 2,
+    "name": "Jane Doe",
+    "title": "Chief Scientific Officer",
+    "image": "https://via.placeholder.com/200"
+  }
+]
