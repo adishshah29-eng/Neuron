@@ -1,4 +1,4 @@
-import React, { useRef, useMemo, useState } from 'react';
+import React, { useRef, useMemo, useState, useEffect } from 'react';
 import { Canvas, useFrame, useThree } from '@react-three/fiber';
 import { Stars } from '@react-three/drei';
 import * as THREE from 'three';
@@ -76,10 +76,21 @@ const ParticleBrain = () => {
 
   const [hovered, setHovered] = useState(false);
   const scatterProgress = useRef(0);
+  const targetScatter = useRef(0);
   const mouseNDC = useRef(new THREE.Vector2(0, 0));
   const mouseLocal = useRef(new THREE.Vector3());
   const groundPlane = useMemo(() => new THREE.Plane(new THREE.Vector3(0, 0, 1), 0), []);
   const raycaster = useMemo(() => new THREE.Raycaster(), []);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const maxScroll = window.innerHeight * 1.2;
+      targetScatter.current = Math.min(1, Math.max(0, window.scrollY / maxScroll));
+    };
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    handleScroll();
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
 
   // Pre-calculate all geometric data once
   const geometryData = useMemo(() => {
@@ -100,10 +111,27 @@ const ParticleBrain = () => {
       home[ix] = p.x; home[ix + 1] = p.y; home[ix + 2] = p.z;
 
       const len = Math.hypot(p.x, p.y, p.z) || 1;
-      const dist = CONFIG.scatterDistanceMin + Math.random() * (CONFIG.scatterDistanceMax - CONFIG.scatterDistanceMin);
-      scatterTo[ix] = (p.x / len) * dist + (Math.random() - 0.5) * 5;
-      scatterTo[ix + 1] = (p.y / len) * dist + (Math.random() - 0.5) * 5;
-      scatterTo[ix + 2] = (p.z / len) * dist + (Math.random() - 0.5) * 5;
+      
+      // Chip shape calculation for scatterTo
+      const side = Math.ceil(Math.sqrt(N));
+      const row = Math.floor(i / side);
+      const col = i % side;
+      const chipSize = 35; // How wide the chip is
+      const cx = (col / side - 0.5) * chipSize;
+      const cy = (row / side - 0.5) * chipSize;
+      
+      // Texture for the chip (raised central core + flat outer board)
+      const distFromCenter = Math.max(Math.abs(cx), Math.abs(cy));
+      let cz = (Math.random() - 0.5) * 0.5; // Very flat base thickness
+      if (distFromCenter < 6) {
+        cz += 2.5; // Central raised processor bump
+      } else if (distFromCenter > 12 && distFromCenter < 14) {
+        cz += 1.0; // Outer ring/border
+      }
+
+      scatterTo[ix] = cx;
+      scatterTo[ix + 1] = cy;
+      scatterTo[ix + 2] = cz;
 
       const jt = Math.random() * Math.PI * 2, ju = Math.random() * 2 - 1, js = Math.sqrt(1 - ju * ju);
       wobDir[ix] = js * Math.cos(jt); wobDir[ix + 1] = ju; wobDir[ix + 2] = js * Math.sin(jt);
@@ -211,43 +239,46 @@ const ParticleBrain = () => {
       }
     }
 
-    scatterProgress.current += ((hovered ? 1 : 0) - scatterProgress.current) * CONFIG.scatterEase;
+    scatterProgress.current += (targetScatter.current - scatterProgress.current) * CONFIG.scatterEase;
     const progress = scatterProgress.current;
     
     const posArr = pointsRef.current.geometry.attributes.position.array;
-    const repulseActive = hovered && progress < 0.95;
-    const rR = CONFIG.repulseRadius, rRSq = rR * rR;
-    const { N, home, wobDir, wobPhase, wobSpeed, scatterTo, edges, edgeCount, linePositions, pulses, pulsePositions, pulseColors } = geometryData;
+    const colorArr = pointsRef.current.geometry.attributes.color.array;
+    const { N, home, wobDir, wobPhase, wobSpeed, scatterTo, edges, edgeCount, linePositions, pulses, pulsePositions, pulseColors, colors: baseColors } = geometryData;
 
     for (let i = 0; i < CONFIG.particleCount; i++) {
       const ix = i * 3;
-      const wob = Math.sin(t * wobSpeed[i] + wobPhase[i]) * CONFIG.wobbleAmplitude;
+      // Wobble only applies when it's a brain (progress near 0)
+      const wob = Math.sin(t * wobSpeed[i] + wobPhase[i]) * CONFIG.wobbleAmplitude * (1 - progress);
 
       let px = home[ix] + wobDir[ix] * wob;
       let py = home[ix + 1] + wobDir[ix + 1] * wob;
       let pz = home[ix + 2] + wobDir[ix + 2] * wob;
 
       if (progress > 0.001) {
-        px += (scatterTo[ix] - px) * progress;
-        py += (scatterTo[ix + 1] - py) * progress;
-        pz += (scatterTo[ix + 2] - pz) * progress;
+        // Eased transition to chip
+        const easeProg = progress < 0.5 ? 2 * progress * progress : 1 - Math.pow(-2 * progress + 2, 2) / 2;
+        px += (scatterTo[ix] - px) * easeProg;
+        py += (scatterTo[ix + 1] - py) * easeProg;
+        pz += (scatterTo[ix + 2] - pz) * easeProg;
       }
 
-      if (repulseActive) {
-        const dx = px - mouseLocal.current.x;
-        const dy = py - mouseLocal.current.y;
-        const dSq = dx * dx + dy * dy;
-        if (dSq < rRSq) {
-          const d = Math.sqrt(dSq) || 0.001;
-          const force = (1 - d / rR) * CONFIG.repulseStrength * (1 - progress);
-          px += (dx / d) * force;
-          py += (dy / d) * force;
-        }
+      // Smoothly transition colors from organic to digital teal/gold as it forms the chip
+      let colorR = baseColors[ix];
+      let colorG = baseColors[ix + 1];
+      let colorB = baseColors[ix + 2];
+      
+      if (progress > 0.001) {
+        colorR += (0.1 - colorR) * progress; // Darker red
+        colorG += (0.9 - colorG) * progress; // Bright green/teal
+        colorB += (0.7 - colorB) * progress; // Bright blue
       }
 
       posArr[ix] = px; posArr[ix + 1] = py; posArr[ix + 2] = pz;
+      colorArr[ix] = colorR; colorArr[ix + 1] = colorG; colorArr[ix + 2] = colorB;
     }
     pointsRef.current.geometry.attributes.position.needsUpdate = true;
+    pointsRef.current.geometry.attributes.color.needsUpdate = true;
 
     // Update lines
     for (let e = 0; e < edgeCount; e++) {
@@ -327,14 +358,14 @@ const ParticleBrain = () => {
 
 const NeuralNetwork = () => {
   return (
-    <div style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', zIndex: 0, backgroundColor: 'transparent', overflow: 'hidden' }}>
+    <div style={{ position: 'fixed', top: 0, left: 0, width: '100vw', height: '100vh', zIndex: 0, backgroundColor: 'transparent', overflow: 'hidden' }}>
       <Canvas camera={{ position: [0, 0, 22], fov: 60 }} style={{ position: 'absolute', top: 0, left: 0, zIndex: 2 }}>
         <ParticleBrain />
       </Canvas>
       <div style={{
         position: 'absolute',
         top: 0, left: 0, width: '100%', height: '100%',
-        background: 'radial-gradient(circle at center, rgba(2,4,10,0.0) 20%, rgba(2,4,10,0.9) 100%)',
+        background: 'radial-gradient(circle at center, rgba(0,0,0,0.0) 20%, rgba(0,0,0,0.9) 100%)',
         pointerEvents: 'none',
         zIndex: 3
       }} />

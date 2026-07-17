@@ -152,19 +152,71 @@ const Home = () => {
       </section>
 
       {/* Advisors Section */}
-      <section style={{ backgroundColor: 'transparent' }}>
-        <div className="container">
-          <div style={{ textAlign: 'center', marginBottom: '4rem' }}>
+      <section style={{ backgroundColor: 'transparent', overflow: 'hidden', paddingBottom: '4rem' }}>
+        <div className="container" style={{ marginBottom: '4rem' }}>
+          <div style={{ textAlign: 'center' }}>
             <span className="text-overline">Experts</span>
             <h2 style={{ color: 'var(--color-primary-dark)' }}>Our Advisors</h2>
           </div>
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(280px, 1fr))', gap: '1.5rem' }}>
+        </div>
+
+        <div className="marquee-container" style={{ display: 'flex', width: '100%', overflow: 'hidden', paddingBlock: '2rem', marginBlock: '-2rem' }}>
+          <div className="marquee-content" style={{ display: 'flex', gap: '2rem', paddingRight: '2rem', animation: 'marquee 40s linear infinite', alignItems: 'center' }}>
             {advisorsData.map(advisor => (
-              <div key={advisor.id} className="bento-card" style={{ padding: '1.5rem', display: 'flex', flexDirection: 'row', alignItems: 'center', gap: '1rem' }}>
-                <div style={{ width: '60px', height: '60px', borderRadius: '50%', backgroundColor: 'var(--color-border)', flexShrink: 0 }}></div>
+              <div key={advisor.id} className="advisor-card">
+                <h3 style={{ fontSize: '1.125rem', marginBottom: '0.25rem', color: 'var(--color-primary-dark)' }}>{advisor.name}</h3>
+                <p style={{ fontSize: '0.875rem', color: '#718096', margin: 0 }}>{advisor.title}</p>
+              </div>
+            ))}
+          </div>
+          {/* Duplicate for seamless looping */}
+          <div className="marquee-content" aria-hidden="true" style={{ display: 'flex', gap: '2rem', paddingRight: '2rem', animation: 'marquee 40s linear infinite' }}>
+            {advisorsData.map(advisor => (
+              <div key={`${advisor.id}-dup`} className="advisor-card">
+                <h3 style={{ fontSize: '1.125rem', marginBottom: '0.25rem', color: 'var(--color-primary-dark)' }}>{advisor.name}</h3>
+                <p style={{ fontSize: '0.875rem', color: '#718096', margin: 0 }}>{advisor.title}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Testimonials Section */}
+      <section style={{ backgroundColor: 'transparent', paddingBlock: '6rem', position: 'relative' }}>
+        <div className="container">
+          <div style={{ textAlign: 'center', marginBottom: '4rem' }}>
+            <span className="text-overline">Testimonials</span>
+            <h2 style={{ color: 'var(--color-primary-dark)' }}>What People Are Saying</h2>
+          </div>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '2rem' }}>
+            {[
+              {
+                id: 1,
+                name: "Dr. Elena Rodriguez",
+                role: "Neuroscientist",
+                quote: "Sharper Sense is redefining what we thought was possible with non-invasive wearables. The clarity it provides is unprecedented."
+              },
+              {
+                id: 2,
+                name: "Michael Chang",
+                role: "Professional Athlete",
+                quote: "In high-pressure situations, focus is everything. This technology gives me the edge I need to perform at my absolute peak."
+              },
+              {
+                id: 3,
+                name: "Sarah Jenkins",
+                role: "Surgeon",
+                quote: "The ability to maintain extended concentration without fatigue has transformed my surgical practice. Truly groundbreaking."
+              }
+            ].map(testimonial => (
+              <div key={testimonial.id} className="testimonial-card">
+                <div style={{ color: 'var(--color-cta)', fontSize: '3rem', fontFamily: 'serif', marginBottom: '1rem', lineHeight: '0.5' }}>"</div>
+                <p style={{ fontSize: '1.125rem', fontStyle: 'italic', color: 'rgba(255,255,255,0.9)', marginBottom: '1.5rem', flexGrow: 1 }}>
+                  {testimonial.quote}
+                </p>
                 <div>
-                  <h3 style={{ fontSize: '1.125rem', marginBottom: '0.125rem', color: 'var(--color-primary-dark)' }}>{advisor.name}</h3>
-                  <p style={{ fontSize: '0.875rem', color: '#718096', margin: 0 }}>{advisor.title}</p>
+                  <h4 style={{ color: 'white', margin: 0, fontSize: '1.125rem' }}>{testimonial.name}</h4>
+                  <span style={{ color: 'var(--color-cta)', fontSize: '0.875rem', fontWeight: 500 }}>{testimonial.role}</span>
                 </div>
               </div>
             ))}
@@ -267,6 +319,68 @@ const Home = () => {
       <style>{`
         @media (max-width: 1024px) {
           .hero-vanta-container { display: none; }
+        }
+        @keyframes marquee {
+          0% { transform: translateX(0%); }
+          100% { transform: translateX(-100%); }
+        }
+        .marquee-container:hover .marquee-content {
+          animation-play-state: paused !important;
+        }
+
+        /* Pro UI Animations */
+        .advisor-card {
+          width: 250px;
+          padding: 1.5rem;
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          justify-content: center;
+          flex-shrink: 0;
+          text-align: center;
+          background: rgba(255, 255, 255, 0.02);
+          border-radius: 1rem;
+          border: 1px solid rgba(255, 255, 255, 0.05);
+          transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+          box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+          cursor: pointer;
+        }
+        .advisor-card:hover {
+          transform: translateY(-5px) scale(1.02);
+          background: rgba(255, 255, 255, 0.06);
+          border-color: rgba(20, 184, 166, 0.5);
+          box-shadow: 0 15px 25px rgba(20, 184, 166, 0.15), 0 0 15px rgba(20, 184, 166, 0.1);
+        }
+
+        .testimonial-card {
+          background: linear-gradient(145deg, rgba(255,255,255,0.03) 0%, rgba(0,0,0,0.2) 100%);
+          border: 1px solid rgba(255,255,255,0.05);
+          border-radius: var(--radius-lg);
+          padding: 2.5rem;
+          display: flex;
+          flex-direction: column;
+          position: relative;
+          overflow: hidden;
+          transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.4s ease;
+        }
+        .testimonial-card::before {
+          content: '';
+          position: absolute;
+          top: 0;
+          left: 0;
+          right: 0;
+          height: 2px;
+          background: linear-gradient(90deg, transparent, rgba(20, 184, 166, 0.8), transparent);
+          opacity: 0;
+          transition: opacity 0.4s ease;
+        }
+        .testimonial-card:hover {
+          transform: translateY(-10px);
+          box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+          border-color: rgba(255,255,255,0.1);
+        }
+        .testimonial-card:hover::before {
+          opacity: 1;
         }
       `}</style>
     </div>

@@ -1,14 +1,56 @@
 [
   {
     "id": 1,
-    "name": "Dr. Charles Rodenkirch",
-    "title": "Founder & CEO",
-    "image": "https://via.placeholder.com/200"
+    "name": "Charles Rodenkirch",
+    "title": "CEO",
+    "image": "/assets/ceo.png"
   },
   {
     "id": 2,
-    "name": "Jane Doe",
-    "title": "Chief Scientific Officer",
-    "image": "https://via.placeholder.com/200"
+    "name": "Linh Le",
+    "title": "CCO",
+    "image": "/assets/cco.png"
+  },
+  {
+    "id": 3,
+    "name": "Nick Reiser",
+    "title": "Director, Product Design",
+    "image": "/assets/director pd.png"
+  },
+  {
+    "id": 4,
+    "name": "Krishna Badhiwala",
+    "title": "Director, Neural Engineering",
+    "image": "/assets/director neural eng.jpeg"
+  },
+  {
+    "id": 5,
+    "name": "Tim Moriarty",
+    "title": "Fractional CFO",
+    "image": "/assets/fractional cfo.png"
+  },
+  {
+    "id": 6,
+    "name": "Qi Wang",
+    "title": "Inventor",
+    "image": "/assets/inventor.png"
+  },
+  {
+    "id": 7,
+    "name": "Camey Calzolano",
+    "title": "Biomedical Engineer",
+    "image": "/assets/bio medical engineer.jpeg"
+  },
+  {
+    "id": 8,
+    "name": "Yahia Abdalla",
+    "title": "Electrical Engineer",
+    "image": "/assets/electrical eng.png"
+  },
+  {
+    "id": 9,
+    "name": "Dhiren Srikanth",
+    "title": "Business Development",
+    "image": "/assets/buisness dev.png"
   }
 ]
