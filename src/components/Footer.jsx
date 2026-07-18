@@ -4,7 +4,9 @@ const Footer = () => {
   return (
     <footer 
       style={{ 
-        backgroundColor: '#02040a', // Matches the Hero section's dark background
+        position: 'relative',
+        zIndex: 10,
+        backgroundColor: 'black', 
         color: 'rgba(255, 255, 255, 0.7)',
         padding: '6rem 0 2rem 0',
         borderTop: '1px solid rgba(255, 255, 255, 0.05)'
@@ -25,9 +27,11 @@ const Footer = () => {
             <p style={{ maxWidth: '400px', lineHeight: 1.7, marginBottom: '2rem' }}>
               Pioneering non-invasive neuromodulation to unlock human potential and restore sensory acuity.
             </p>
-            <div style={{ display: 'flex', gap: '1rem' }}>
-              <a href="#" style={{ color: 'var(--color-cta)', fontWeight: 600 }}>LinkedIn</a>
-              <a href="#" style={{ color: 'var(--color-cta)', fontWeight: 600 }}>Twitter</a>
+            <div style={{ display: 'flex', gap: '1rem', flexWrap: 'wrap' }}>
+              <a href="https://www.linkedin.com/company/SharperSense" target="_blank" rel="noopener noreferrer" style={{ color: 'var(--color-cta)', fontWeight: 600 }}>LinkedIn</a>
+              <a href="https://x.com/SharperSenseInc" target="_blank" rel="noopener noreferrer" style={{ color: 'var(--color-cta)', fontWeight: 600 }}>X (Twitter)</a>
+              <a href="https://www.instagram.com/SharperSense/" target="_blank" rel="noopener noreferrer" style={{ color: 'var(--color-cta)', fontWeight: 600 }}>Instagram</a>
+              <a href="https://www.facebook.com/TrySharperSense/" target="_blank" rel="noopener noreferrer" style={{ color: 'var(--color-cta)', fontWeight: 600 }}>Facebook</a>
             </div>
           </div>
           

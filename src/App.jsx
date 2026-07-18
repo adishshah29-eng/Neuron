@@ -4,6 +4,7 @@ import Navigation from './components/Navigation';
 import Footer from './components/Footer';
 import LenisWrapper from './components/LenisWrapper';
 import SpaceBackground from './components/3d/SpaceBackground';
+import ChatWidget from './components/chat/ChatWidget';
 
 // Pages
 import Home from './pages/Home';
@@ -46,6 +47,7 @@ function App() {
         </Routes>
       </main>
       <Footer />
+      <ChatWidget />
     </LenisWrapper>
   );
 }

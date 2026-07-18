@@ -1,5 +1,32 @@
 import React from 'react';
+import { motion } from 'framer-motion';
 import NeuralNetwork from '../components/3d/NeuralNetwork';
+
+// Animation Presets
+const fadeUp = {
+  initial: { opacity: 0, y: 30 },
+  whileInView: { opacity: 1, y: 0 },
+  viewport: { once: true, margin: "-50px" },
+  transition: { duration: 0.6, ease: "easeOut" }
+};
+
+const fadeLeft = {
+  initial: { opacity: 0, x: -30 },
+  whileInView: { opacity: 1, x: 0 },
+  viewport: { once: true, margin: "-50px" },
+  transition: { duration: 0.6, ease: "easeOut" }
+};
+
+const staggerContainer = {
+  hidden: {},
+  visible: { transition: { staggerChildren: 0.15 } }
+};
+
+const staggerItem = {
+  hidden: { opacity: 0, y: 30 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: "easeOut" } }
+};
+import { Activity, Brain, Zap, Shield, Smartphone } from 'lucide-react';
 import teamData from '../data/team.json';
 import advisorsData from '../data/advisors.json';
 
@@ -17,26 +44,24 @@ const Home = () => {
       }}>
         <NeuralNetwork />
         
-        <div style={{
-          position: 'relative',
-          zIndex: 1,
-          pointerEvents: 'none',
-          maxWidth: '1200px',
-          width: '100%',
-          display: 'grid',
-          gridTemplateColumns: '1fr 1fr',
-          gap: '4rem',
-          alignItems: 'center'
-        }}>
-          <div>
+        <div
+          className="responsive-grid-2"
+          style={{
+            position: 'relative',
+            zIndex: 1,
+            pointerEvents: 'none',
+            maxWidth: '1200px',
+            width: '100%',
+          }}>
+          <motion.div {...fadeLeft}>
             <h1 style={{ 
-              fontSize: '4rem', 
+              fontSize: '4.5rem', 
               lineHeight: 1.1, 
               color: 'white',
               marginBottom: '1.5rem',
               textShadow: '0 4px 20px rgba(0,0,0,0.8)'
             }}>
-              Unlock Your Potential.
+              Clarity When It Counts.
             </h1>
             <p style={{ 
               fontSize: '1.25rem', 
@@ -51,7 +76,7 @@ const Home = () => {
               <a href="#early-access" className="btn-primary" style={{ marginRight: '1rem' }}>Get Early Access</a>
               <a href="#science" style={{ color: 'white', fontWeight: 600, textDecoration: 'none' }}>Read the Science →</a>
             </div>
-          </div>
+          </motion.div>
           <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
              {/* Placeholder for future 3D element or floating cards */}
           </div>
@@ -59,106 +84,227 @@ const Home = () => {
       </section>
 
       {/* Pillars Section */}
-      <section style={{ backgroundColor: 'transparent' }}>
+      <section style={{ backgroundColor: 'transparent', position: 'relative', zIndex: 1, paddingBlock: '4rem' }}>
         <div className="container">
-          <div style={{ textAlign: 'center', marginBottom: '4rem', maxWidth: '600px', marginInline: 'auto' }}>
+          <div style={{ textAlign: 'center', marginBottom: '2rem', maxWidth: '700px', marginInline: 'auto' }}>
             <span className="text-overline">The Technology</span>
-            <h2 style={{ color: 'var(--color-primary-dark)' }}>How It Works</h2>
-            <p style={{ marginInline: 'auto', marginTop: '1rem' }}>
+            <h2 style={{ color: 'var(--text-h)' }}>How It Works</h2>
+            <p style={{ marginInline: 'auto', marginTop: '1rem', color: 'var(--text)', fontSize: '1.125rem' }}>
               We've miniaturized targeted neuromodulation into a discreet, wearable patch that interfaces directly with your nervous system.
             </p>
           </div>
           
-          <div className="bento-grid">
-            <div className="bento-card" style={{ gridColumn: 'span 12' }}>
-              <h3 style={{ marginBottom: '1rem', color: 'var(--color-primary)', fontSize: '1.75rem' }}>Non-Invasive Stimulation</h3>
-              <p>
-                Sharper Sense patches deliver precise, imperceptible electrical patterns to peripheral nerves. This targeted stimulation upregulates sensory processing pathways, giving you unparalleled clarity when you need it most—without drugs or side effects.
+          <motion.div className="bento-grid" variants={staggerContainer} initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-50px" }}>
+            {/* Card 1: Our Technology */}
+            <motion.div className="bento-card" variants={staggerItem} style={{ 
+              gridColumn: 'span 4', 
+              background: 'linear-gradient(180deg, rgba(30, 41, 59, 0.95) 0%, rgba(15, 23, 42, 0.98) 100%)',
+              backdropFilter: 'blur(24px)'
+            }}>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '1rem', marginBottom: '1.25rem' }}>
+                <Brain size={24} color="var(--color-cta)" />
+                <h3 style={{ margin: 0, color: 'white', textTransform: 'uppercase' }}>Our Technology</h3>
+              </div>
+              <p style={{ color: 'rgba(255, 255, 255, 0.85)', lineHeight: 1.6, fontSize: '1.05rem' }}>
+                Single-use neurostimulation patches that enhance cognition and sensory processing while worn on the neck. Hands-free, maintenance-free, safe, and comfortable.
               </p>
-            </div>
+            </motion.div>
             
-            <div className="bento-card" style={{ gridColumn: 'span 6' }}>
-              <h3 style={{ marginBottom: '1rem', color: 'var(--color-primary)' }}>Clinically Validated</h3>
-              <p>
-                Backed by years of rigorous clinical trials and neuroscience research, our technology has been proven to enhance sensory acuity and cognitive focus in double-blind studies.
+            {/* Card 2: The Science */}
+            <motion.div className="bento-card" variants={staggerItem} style={{ 
+              gridColumn: 'span 4',
+              background: 'linear-gradient(180deg, rgba(30, 41, 59, 0.95) 0%, rgba(15, 23, 42, 0.98) 100%)',
+              backdropFilter: 'blur(24px)'
+            }}>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '1rem', marginBottom: '1.25rem' }}>
+                <Shield size={24} color="#60A5FA" />
+                <h3 style={{ margin: 0, color: 'white', textTransform: 'uppercase' }}>The Science</h3>
+              </div>
+              <p style={{ color: 'rgba(255, 255, 255, 0.85)', lineHeight: 1.6, fontSize: '1.05rem' }}>
+                The Sharper Sense patch delivers an electric field that noninvasively stimulates nerves in your neck. These nerves project to the brain and primarily causes release of norepinephrine, which enhances cognition and sensory processing.
               </p>
-            </div>
+            </motion.div>
             
-            <div className="bento-card" style={{ gridColumn: 'span 6' }}>
-              <h3 style={{ marginBottom: '1rem', color: 'var(--color-primary)' }}>Seamless Integration</h3>
-              <p>
-                Designed for everyday wear. The ultra-thin, breathable patch syncs instantly with your smartphone for personalized stimulation profiles and real-time biometric feedback.
+            {/* Card 3: Applications */}
+            <motion.div className="bento-card" variants={staggerItem} style={{ 
+              gridColumn: 'span 4',
+              background: 'linear-gradient(180deg, rgba(30, 41, 59, 0.95) 0%, rgba(15, 23, 42, 0.98) 100%)',
+              backdropFilter: 'blur(24px)'
+            }}>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '1rem', marginBottom: '1.25rem' }}>
+                <Activity size={24} color="#C084FC" />
+                <h3 style={{ margin: 0, color: 'white', textTransform: 'uppercase' }}>Applications</h3>
+              </div>
+              <p style={{ color: 'rgba(255, 255, 255, 0.85)', lineHeight: 1.6, fontSize: '1.05rem' }}>
+                Fatigue and distractions impair sensory processing increasing risk of human error and injury. Sharper Sense provides clarity when it counts towards safety and success. Users in military, sports, first responders, shift workers, students, and older adults.
               </p>
-            </div>
-          </div>
+            </motion.div>
+          </motion.div>
         </div>
       </section>
 
       {/* About Section */}
-      <section id="about" style={{ backgroundColor: 'transparent' }}>
+      <section id="about" style={{ backgroundColor: 'transparent', position: 'relative', zIndex: 1, paddingBlock: '4rem' }}>
         <div className="container">
-          <div className="glass-panel" style={{ 
-            display: 'grid', 
-            gridTemplateColumns: '1fr 1fr', 
-            gap: '4rem', 
-            alignItems: 'center',
-            padding: '4rem'
+          <div className="glass-panel responsive-grid-2" style={{ 
+            padding: '3rem'
           }}>
-            <div>
+            <motion.div {...fadeUp}>
               <span className="text-overline">Our Mission</span>
-              <h2 style={{ marginBottom: '1.5rem', color: 'var(--color-primary-dark)' }}>Bridging Neuroscience and Wellness</h2>
-              <p style={{ fontSize: '1.125rem' }}>
+              <h2 style={{ marginBottom: '1.5rem', color: 'var(--text-h)' }}>Bridging Neuroscience and Wellness</h2>
+              <p style={{ fontSize: '1.125rem', color: 'var(--text)' }}>
                 At Sharper Sense, we are pioneering non-invasive neuromodulation techniques to unlock human potential and restore sensory acuity. 
               </p>
-              <p style={{ fontSize: '1.125rem', marginTop: '1rem' }}>
+              <p style={{ fontSize: '1.125rem', marginTop: '1rem', color: 'var(--text)' }}>
                 We believe that everyone deserves the ability to experience the world with absolute clarity. Our team of leading neuroscientists and engineers is dedicated to pushing the boundaries of human performance.
               </p>
-            </div>
-            <div style={{ 
-              backgroundColor: 'var(--color-border)', 
+            </motion.div>
+            <motion.div {...fadeUp} style={{ 
+              position: 'relative',
               borderRadius: 'var(--radius-lg)', 
               height: '100%', 
-              minHeight: '300px',
+              minHeight: '400px',
               display: 'flex',
               alignItems: 'center',
-              justifyContent: 'center'
+              justifyContent: 'center',
+              overflow: 'hidden',
+              boxShadow: '0 20px 40px rgba(0,0,0,0.4)',
+              border: '1px solid rgba(20, 184, 166, 0.2)'
             }}>
-              {/* Graphic Placeholder */}
-              <p style={{ color: '#A0AEC0', fontWeight: '500' }}>[ Brand Graphic / Product Shot ]</p>
-            </div>
+              {/* High-Tech Background Glow */}
+              <div style={{
+                position: 'absolute',
+                top: '50%',
+                left: '50%',
+                transform: 'translate(-50%, -50%)',
+                width: '150%',
+                height: '150%',
+                background: 'radial-gradient(circle, rgba(20, 184, 166, 0.15) 0%, transparent 60%)',
+                zIndex: 0
+              }} />
+              
+              {/* Product Image */}
+              <img 
+                src="/assets/sensor.jpg" 
+                alt="Sharper Sense Neuro-Sensor" 
+                style={{
+                  width: '100%',
+                  height: '100%',
+                  objectFit: 'cover',
+                  position: 'absolute',
+                  top: 0,
+                  left: 0,
+                  zIndex: 1,
+                  opacity: 0.9,
+                  mixBlendMode: 'lighten'
+                }} 
+              />
+
+              {/* Gradient Overlay for Depth */}
+              <div style={{
+                position: 'absolute',
+                top: 0, left: 0, right: 0, bottom: 0,
+                background: 'linear-gradient(135deg, rgba(10, 19, 32, 0.1) 0%, rgba(10, 19, 32, 0.7) 100%)',
+                zIndex: 2,
+                pointerEvents: 'none'
+              }} />
+
+              {/* Tech UI Accents */}
+              <div style={{
+                position: 'absolute',
+                top: '1rem', left: '1rem',
+                width: '30px', height: '30px',
+                borderTop: '2px solid var(--color-cta)',
+                borderLeft: '2px solid var(--color-cta)',
+                zIndex: 3
+              }} />
+              <div style={{
+                position: 'absolute',
+                bottom: '1rem', right: '1rem',
+                width: '30px', height: '30px',
+                borderBottom: '2px solid var(--color-cta)',
+                borderRight: '2px solid var(--color-cta)',
+                zIndex: 3
+              }} />
+              
+              {/* Overlay Text/Data */}
+              <div style={{
+                position: 'absolute',
+                bottom: '2rem',
+                left: '2rem',
+                zIndex: 4,
+                display: 'flex',
+                flexDirection: 'column',
+                gap: '0.25rem'
+              }}>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+                  <div style={{ width: '8px', height: '8px', borderRadius: '50%', backgroundColor: 'var(--color-cta)', boxShadow: '0 0 10px var(--color-cta)' }} />
+                  <span style={{ color: 'var(--color-cta)', fontSize: '0.75rem', fontWeight: 'bold', letterSpacing: '2px' }}>STATUS: ACTIVE</span>
+                </div>
+                <span style={{ color: 'white', fontSize: '0.875rem', letterSpacing: '1px', opacity: 0.8 }}>NEURAL LINK ESTABLISHED</span>
+              </div>
+            </motion.div>
           </div>
         </div>
       </section>
 
       {/* Team Section */}
-      <section id="team" style={{ backgroundColor: 'transparent' }}>
+      <section id="team" style={{ backgroundColor: 'transparent', position: 'relative', zIndex: 1, paddingBlock: '4rem' }}>
         <div className="container">
-          <div style={{ textAlign: 'center', marginBottom: '4rem' }}>
+          <div style={{ textAlign: 'center', marginBottom: '2rem' }}>
             <span className="text-overline">Leadership</span>
-            <h2 style={{ color: 'var(--color-primary-dark)' }}>Meet the Team</h2>
+            <h2 style={{ color: 'var(--text-h)' }}>Meet the Team</h2>
           </div>
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(220px, 1fr))', gap: '3rem' }}>
+          <motion.div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(260px, 1fr))', gap: '2rem' }} variants={staggerContainer} initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-50px" }}>
             {teamData.map(member => (
-              <div key={member.id} style={{ textAlign: 'center' }}>
-                <div className="avatar-container">
-                  <img src={member.image} alt={member.name} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+              <motion.div key={member.id} variants={staggerItem} className="bento-card" style={{ 
+                textAlign: 'center',
+                background: 'linear-gradient(180deg, rgba(30, 41, 59, 0.7) 0%, rgba(15, 23, 42, 0.9) 100%)',
+                backdropFilter: 'blur(16px)',
+                padding: '2.5rem 1.5rem',
+                display: 'flex',
+                flexDirection: 'column',
+                alignItems: 'center',
+                transition: 'transform 0.3s ease, box-shadow 0.3s ease'
+              }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.transform = 'translateY(-5px)';
+                e.currentTarget.style.boxShadow = '0 10px 30px -10px rgba(20, 184, 166, 0.3)';
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.transform = 'translateY(0)';
+                e.currentTarget.style.boxShadow = 'none';
+              }}
+              >
+                <div style={{ 
+                  width: '120px', 
+                  height: '120px', 
+                  borderRadius: '50%', 
+                  overflow: 'hidden',
+                  marginBottom: '1.5rem',
+                  border: '2px solid rgba(20, 184, 166, 0.3)',
+                  boxShadow: '0 0 20px rgba(20, 184, 166, 0.15)',
+                  padding: '4px',
+                  background: 'var(--surface)'
+                }}>
+                  <img src={member.image} alt={member.name} style={{ width: '100%', height: '100%', objectFit: 'cover', borderRadius: '50%' }} />
                 </div>
-                <h3 style={{ fontSize: '1.25rem', marginBottom: '0.25rem', color: 'var(--color-primary-dark)' }}>{member.name}</h3>
-                <p style={{ fontSize: '0.875rem', color: 'var(--color-cta)', fontWeight: '600', marginInline: 'auto' }}>{member.title}</p>
-              </div>
+                <h3 style={{ fontSize: '1.25rem', marginBottom: '0.25rem', color: 'white' }}>{member.name}</h3>
+                <p style={{ fontSize: '0.875rem', color: 'var(--color-cta)', fontWeight: '600', letterSpacing: '0.5px', textTransform: 'uppercase' }}>{member.title}</p>
+              </motion.div>
             ))}
-          </div>
+          </motion.div>
         </div>
       </section>
 
       {/* Advisors Section */}
-      <section style={{ backgroundColor: 'transparent', overflow: 'hidden', paddingBottom: '4rem' }}>
-        <div className="container" style={{ marginBottom: '4rem' }}>
+      <section style={{ backgroundColor: 'transparent', overflow: 'hidden', paddingBlock: '4rem', position: 'relative', zIndex: 1 }}>
+        <motion.div className="container" style={{ marginBottom: '2rem' }} {...fadeUp}>
           <div style={{ textAlign: 'center' }}>
             <span className="text-overline">Experts</span>
-            <h2 style={{ color: 'var(--color-primary-dark)' }}>Our Advisors</h2>
+            <h2 style={{ color: 'var(--text-h)' }}>Our Advisors</h2>
           </div>
-        </div>
+        </motion.div>
 
         <div className="marquee-container" style={{ display: 'flex', width: '100%', overflow: 'hidden', paddingBlock: '2rem', marginBlock: '-2rem' }}>
           <div className="marquee-content" style={{ display: 'flex', gap: '2rem', paddingRight: '2rem', animation: 'marquee 40s linear infinite', alignItems: 'center' }}>
@@ -182,13 +328,13 @@ const Home = () => {
       </section>
 
       {/* Testimonials Section */}
-      <section style={{ backgroundColor: 'transparent', paddingBlock: '6rem', position: 'relative' }}>
+      <section style={{ backgroundColor: 'transparent', paddingBlock: '4rem', position: 'relative', zIndex: 1 }}>
         <div className="container">
-          <div style={{ textAlign: 'center', marginBottom: '4rem' }}>
+          <div style={{ textAlign: 'center', marginBottom: '2rem' }}>
             <span className="text-overline">Testimonials</span>
-            <h2 style={{ color: 'var(--color-primary-dark)' }}>What People Are Saying</h2>
+            <h2 style={{ color: 'var(--text-h)' }}>What People Are Saying</h2>
           </div>
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '2rem' }}>
+          <motion.div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '2rem' }} variants={staggerContainer} initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-50px" }}>
             {[
               {
                 id: 1,
@@ -209,7 +355,7 @@ const Home = () => {
                 quote: "The ability to maintain extended concentration without fatigue has transformed my surgical practice. Truly groundbreaking."
               }
             ].map(testimonial => (
-              <div key={testimonial.id} className="testimonial-card">
+              <motion.div key={testimonial.id} variants={staggerItem} className="testimonial-card">
                 <div style={{ color: 'var(--color-cta)', fontSize: '3rem', fontFamily: 'serif', marginBottom: '1rem', lineHeight: '0.5' }}>"</div>
                 <p style={{ fontSize: '1.125rem', fontStyle: 'italic', color: 'rgba(255,255,255,0.9)', marginBottom: '1.5rem', flexGrow: 1 }}>
                   {testimonial.quote}
@@ -218,14 +364,14 @@ const Home = () => {
                   <h4 style={{ color: 'white', margin: 0, fontSize: '1.125rem' }}>{testimonial.name}</h4>
                   <span style={{ color: 'var(--color-cta)', fontSize: '0.875rem', fontWeight: 500 }}>{testimonial.role}</span>
                 </div>
-              </div>
+              </motion.div>
             ))}
-          </div>
+          </motion.div>
         </div>
       </section>
 
       {/* Early Access Form */}
-      <section id="early-access" style={{ backgroundColor: 'transparent', paddingBlock: '8rem', position: 'relative', overflow: 'hidden' }}>
+      <section id="early-access" style={{ backgroundColor: 'transparent', paddingBlock: '4rem', position: 'relative', overflow: 'hidden', zIndex: 1 }}>
         {/* Decorative background glow */}
         <div style={{
           position: 'absolute',
@@ -241,19 +387,15 @@ const Home = () => {
         }} />
 
         <div className="container" style={{ position: 'relative', zIndex: 1 }}>
-          <div style={{
-            background: 'linear-gradient(145deg, #14263F 0%, #0a1320 100%)',
+          <motion.div className="responsive-grid-2" style={{
+            background: 'var(--surface)',
             borderRadius: 'var(--radius-lg)',
             padding: '4rem',
-            border: '1px solid rgba(255,255,255,0.1)',
-            boxShadow: '0 25px 50px -12px rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(255,255,255,0.1)',
+            border: '1px solid var(--border)',
+            boxShadow: 'var(--shadow)',
             maxWidth: '1000px',
-            marginInline: 'auto',
-            display: 'grid',
-            gridTemplateColumns: '1fr 1fr',
-            gap: '4rem',
-            alignItems: 'center'
-          }}>
+            marginInline: 'auto'
+          }} {...fadeUp}>
             <div>
               <span className="text-overline" style={{ color: 'var(--color-cta)' }}>Beta Program</span>
               <h2 style={{ marginBottom: '1rem', color: 'white', fontSize: '2.5rem' }}>Secure Your Early Access.</h2>
@@ -285,6 +427,64 @@ const Home = () => {
               backdropFilter: 'blur(10px)'
             }}>
               <form style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }} onSubmit={(e) => e.preventDefault()}>
+                <div className="responsive-form-grid" style={{ gap: '1rem' }}>
+                  <div>
+                    <label style={{ display: 'block', color: 'rgba(255,255,255,0.9)', marginBottom: '0.5rem', fontSize: '0.875rem', fontWeight: 500 }}>First Name</label>
+                    <input 
+                      type="text" 
+                      placeholder="Jane" 
+                      required
+                      style={{ 
+                        width: '100%', 
+                        padding: '1rem', 
+                        borderRadius: '0.5rem', 
+                        border: '1px solid var(--border)', 
+                        background: 'rgba(0,0,0,0.3)',
+                        color: 'var(--text-h)',
+                        outline: 'none', 
+                        fontSize: '1rem',
+                        transition: 'border-color 0.2s, box-shadow 0.2s',
+                        boxSizing: 'border-box'
+                      }}
+                      onFocus={(e) => {
+                        e.target.style.borderColor = 'var(--color-cta)';
+                        e.target.style.boxShadow = '0 0 0 2px var(--color-cta-dim)';
+                      }}
+                      onBlur={(e) => {
+                        e.target.style.borderColor = 'var(--border)';
+                        e.target.style.boxShadow = 'none';
+                      }}
+                    />
+                  </div>
+                  <div>
+                    <label style={{ display: 'block', color: 'rgba(255,255,255,0.9)', marginBottom: '0.5rem', fontSize: '0.875rem', fontWeight: 500 }}>Last Name</label>
+                    <input 
+                      type="text" 
+                      placeholder="Doe" 
+                      required
+                      style={{ 
+                        width: '100%', 
+                        padding: '1rem', 
+                        borderRadius: '0.5rem', 
+                        border: '1px solid var(--border)', 
+                        background: 'rgba(0,0,0,0.3)',
+                        color: 'var(--text-h)',
+                        outline: 'none', 
+                        fontSize: '1rem',
+                        transition: 'border-color 0.2s, box-shadow 0.2s',
+                        boxSizing: 'border-box'
+                      }}
+                      onFocus={(e) => {
+                        e.target.style.borderColor = 'var(--color-cta)';
+                        e.target.style.boxShadow = '0 0 0 2px var(--color-cta-dim)';
+                      }}
+                      onBlur={(e) => {
+                        e.target.style.borderColor = 'var(--border)';
+                        e.target.style.boxShadow = 'none';
+                      }}
+                    />
+                  </div>
+                </div>
                 <div>
                   <label style={{ display: 'block', color: 'rgba(255,255,255,0.9)', marginBottom: '0.5rem', fontSize: '0.875rem', fontWeight: 500 }}>Work Email</label>
                   <input 
@@ -295,12 +495,20 @@ const Home = () => {
                       width: '100%', 
                       padding: '1rem', 
                       borderRadius: '0.5rem', 
-                      border: '1px solid rgba(255,255,255,0.1)', 
-                      background: 'rgba(0,0,0,0.2)',
-                      color: 'white',
+                      border: '1px solid var(--border)', 
+                      background: 'rgba(0,0,0,0.3)',
+                      color: 'var(--text-h)',
                       outline: 'none', 
                       fontSize: '1rem',
-                      transition: 'border-color 0.2s'
+                      transition: 'border-color 0.2s, box-shadow 0.2s'
+                    }}
+                    onFocus={(e) => {
+                      e.target.style.borderColor = 'var(--color-cta)';
+                      e.target.style.boxShadow = '0 0 0 2px var(--color-cta-dim)';
+                    }}
+                    onBlur={(e) => {
+                      e.target.style.borderColor = 'var(--border)';
+                      e.target.style.boxShadow = 'none';
                     }}
                   />
                 </div>
@@ -312,7 +520,7 @@ const Home = () => {
                 * This product is intended for general wellness. Not a medical device.
               </p>
             </div>
-          </div>
+          </motion.div>
         </div>
       </section>
 
@@ -353,8 +561,8 @@ const Home = () => {
         }
 
         .testimonial-card {
-          background: linear-gradient(145deg, rgba(255,255,255,0.03) 0%, rgba(0,0,0,0.2) 100%);
-          border: 1px solid rgba(255,255,255,0.05);
+          background: linear-gradient(145deg, var(--surface) 0%, rgba(15,23,42,0.6) 100%);
+          border: 1px solid var(--border);
           border-radius: var(--radius-lg);
           padding: 2.5rem;
           display: flex;
