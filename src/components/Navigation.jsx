@@ -85,7 +85,7 @@ const Navigation = () => {
       )}
       
       <style>{`
-        @media (max-width: 768px) {
+        @media (max-width: 960px) {
           .desktop-menu { display: none !important; }
           .mobile-toggle { display: block !important; }
         }

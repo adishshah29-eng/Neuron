@@ -71,7 +71,7 @@ section {
   background-color: var(--color-cta);
   color: white;
   padding: 0.75rem 1.5rem;
-  border-radius: 0.5rem;
+  border-radius: 9999px;
   font-weight: 600;
   transition: background-color 0.2s ease;
   cursor: pointer;
@@ -154,4 +154,135 @@ p {
 
 .avatar-container:hover {
   transform: scale(1.05);
+}
+
+/* ============================================
+   Responsive Grid System
+   ============================================ */
+.responsive-grid-2 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4rem;
+  align-items: center;
+}
+
+.responsive-form-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}
+
+/* ============================================
+   Hero Section
+   ============================================ */
+.hero-section {
+  min-height: 100svh;
+}
+
+/* ============================================
+   Breakpoints
+   ============================================ */
+
+/* 960px: tablet + large-phone landscape — collapse grids */
+@media (max-width: 960px) {
+  .responsive-grid-2 {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+
+  .responsive-form-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .container {
+    padding-inline: 1.25rem;
+  }
+}
+
+/* 600px: portrait mobile — tighten type scale */
+@media (max-width: 600px) {
+  h1 {
+    font-size: clamp(1.875rem, 8vw, 2.5rem);
+  }
+
+  h2 {
+    font-size: clamp(1.375rem, 5vw, 1.75rem);
+  }
+}
+
+/* Landscape + short viewport: hero doesn't need full vh */
+@media (orientation: landscape) and (max-height: 500px) {
+  .hero-section {
+    min-height: auto;
+    padding-block: 4rem !important;
+  }
+}
+
+/* ============================================
+   Bento Components
+   ============================================ */
+.bento-layout-v2 {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  width: 100%;
+}
+
+.bento-card-v2 {
+  background: linear-gradient(145deg, rgba(30, 41, 59, 0.7) 0%, rgba(15, 23, 42, 0.95) 100%);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-top: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 1.5rem;
+  padding: 3rem 2.5rem;
+  transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+  display: flex;
+  flex-direction: column;
+  box-shadow:
+    0 4px 6px -1px rgba(0, 0, 0, 0.1),
+    0 24px 38px -10px rgba(0, 0, 0, 0.5),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1);
+  position: relative;
+  overflow: hidden;
+}
+
+@media (min-width: 961px) {
+  .bento-layout-v2 {
+    flex-direction: row;
+  }
+
+  .bento-card-v2 {
+    flex: 1;
+  }
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .bento-card-v2:hover {
+    transform: translateY(-4px);
+    border-color: rgba(255, 255, 255, 0.15);
+    box-shadow: var(--shadow-glow);
+  }
+}
+
+@media (hover: none) and (pointer: coarse) {
+  .bento-card-v2:active {
+    transform: scale(0.98);
+    border-color: var(--color-cta);
+  }
+}
+
+/* Icon Squircle */
+.icon-squircle {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 64px;
+  height: 64px;
+  border-radius: 18px;
+  background: linear-gradient(135deg, rgba(20, 184, 166, 0.15) 0%, rgba(20, 184, 166, 0.05) 100%);
+  border: 1px solid rgba(20, 184, 166, 0.3);
+  box-shadow: inset 0 0 20px rgba(20, 184, 166, 0.1), 0 8px 16px rgba(0, 0, 0, 0.2);
+  margin-bottom: 2rem;
+  flex-shrink: 0;
 }

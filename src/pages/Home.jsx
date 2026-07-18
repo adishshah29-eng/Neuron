@@ -34,13 +34,12 @@ const Home = () => {
   return (
     <div style={{ backgroundColor: 'transparent', overflowX: 'hidden', width: '100%', maxWidth: '100vw' }}>
       {/* Hero Section with 3D Background */}
-      <section style={{ 
+      <section className="hero-section" style={{ 
         position: 'relative', 
-        minHeight: '100vh', 
         display: 'flex', 
         alignItems: 'center', 
         justifyContent: 'center',
-        padding: '2rem'
+        padding: 'clamp(1rem, 4vw, 2rem)'
       }}>
         <NeuralNetwork />
         
@@ -55,7 +54,6 @@ const Home = () => {
           }}>
           <motion.div {...fadeLeft}>
             <h1 style={{ 
-              fontSize: '4.5rem', 
               lineHeight: 1.1, 
               color: 'white',
               marginBottom: '1.5rem',
@@ -67,7 +65,6 @@ const Home = () => {
               fontSize: '1.25rem', 
               color: 'rgba(255, 255, 255, 0.9)', 
               marginBottom: '2rem',
-              maxWidth: '80%',
               textShadow: '0 2px 10px rgba(0,0,0,0.8)'
             }}>
               Sharper Sense develops non-invasive neuromodulation patches that safely enhance human performance, focus, and recovery.
@@ -424,7 +421,7 @@ const Home = () => {
           }} {...fadeUp}>
             <div>
               <span className="text-overline" style={{ color: 'var(--color-cta)' }}>Beta Program</span>
-              <h2 style={{ marginBottom: '1rem', color: 'white', fontSize: '2.5rem' }}>Secure Your Early Access.</h2>
+              <h2 style={{ marginBottom: '1rem', color: 'white' }}>Secure Your Early Access.</h2>
               <p style={{ color: 'rgba(255,255,255,0.7)', fontSize: '1.125rem', marginBottom: '2rem', lineHeight: 1.6 }}>
                 Join our exclusive waitlist to be among the very first to experience the future of human sensory enhancement.
               </p>
