@@ -38,7 +38,7 @@ function App() {
       <SpaceBackground />
       <Navigation />
       <ScrollToAnchor />
-      <main style={{ position: 'relative', zIndex: 1 }}>
+      <main style={{ position: 'relative', zIndex: 1, overflowX: 'hidden', width: '100%', maxWidth: '100vw' }}>
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/science" element={<Science />} />

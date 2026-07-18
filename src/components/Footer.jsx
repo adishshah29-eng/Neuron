@@ -9,7 +9,10 @@ const Footer = () => {
         backgroundColor: 'black', 
         color: 'rgba(255, 255, 255, 0.7)',
         padding: '6rem 0 2rem 0',
-        borderTop: '1px solid rgba(255, 255, 255, 0.05)'
+        borderTop: '1px solid rgba(255, 255, 255, 0.05)',
+        overflowX: 'hidden',
+        width: '100%',
+        maxWidth: '100vw'
       }}
     >
       <div className="container">
@@ -20,7 +23,7 @@ const Footer = () => {
           marginBottom: '4rem'
         }}>
           {/* Brand Column */}
-          <div style={{ gridColumn: 'span 2' }}>
+          <div className="footer-brand">
             <h2 style={{ fontSize: '1.75rem', marginBottom: '1.5rem', color: 'white', letterSpacing: '0.05em' }}>
               SHARPER SENSE
             </h2>

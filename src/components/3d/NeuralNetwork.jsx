@@ -520,7 +520,7 @@ const ParticleBrain = () => {
 
 const NeuralNetwork = () => {
   return (
-    <div style={{ position: 'fixed', top: 0, left: 0, width: '100vw', height: '100vh', zIndex: 0, backgroundColor: 'transparent', overflow: 'hidden' }}>
+    <div style={{ position: 'fixed', top: 0, left: 0, width: '100%', height: '100vh', zIndex: 0, backgroundColor: 'transparent', overflow: 'hidden' }}>
       <Canvas camera={{ position: [0, 0, 22], fov: 60 }} style={{ position: 'absolute', top: 0, left: 0, zIndex: 2 }}>
         <ParticleBrain />
       </Canvas>

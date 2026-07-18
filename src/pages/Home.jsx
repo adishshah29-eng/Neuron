@@ -26,13 +26,13 @@ const staggerItem = {
   hidden: { opacity: 0, y: 30 },
   visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: "easeOut" } }
 };
-import { Activity, Brain, Zap, Shield, Smartphone } from 'lucide-react';
+import { Activity, Brain, Zap, Shield, Smartphone, Cpu } from 'lucide-react';
 import teamData from '../data/team.json';
 import advisorsData from '../data/advisors.json';
 
 const Home = () => {
   return (
-    <div style={{ backgroundColor: 'transparent' }}>
+    <div style={{ backgroundColor: 'transparent', overflowX: 'hidden', width: '100%', maxWidth: '100vw' }}>
       {/* Hero Section with 3D Background */}
       <section style={{ 
         position: 'relative', 
@@ -94,48 +94,75 @@ const Home = () => {
             </p>
           </div>
           
-          <motion.div className="bento-grid" variants={staggerContainer} initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-50px" }}>
+          <motion.div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem', width: '100%' }} variants={staggerContainer} initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-50px" }}>
             {/* Card 1: Our Technology */}
-            <motion.div className="bento-card" variants={staggerItem} style={{ 
-              gridColumn: 'span 4', 
-              background: 'linear-gradient(180deg, rgba(30, 41, 59, 0.95) 0%, rgba(15, 23, 42, 0.98) 100%)',
-              backdropFilter: 'blur(24px)'
+            <motion.div variants={staggerItem} style={{ 
+              background: 'linear-gradient(145deg, rgba(30, 41, 59, 0.7) 0%, rgba(15, 23, 42, 0.95) 100%)',
+              backdropFilter: 'blur(24px)',
+              border: '1px solid rgba(255, 255, 255, 0.08)',
+              borderTop: '1px solid rgba(255, 255, 255, 0.15)',
+              borderRadius: '1.5rem',
+              padding: '3rem 2.5rem',
+              boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 24px 38px -10px rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.1)'
             }}>
-              <div style={{ display: 'flex', alignItems: 'center', gap: '1rem', marginBottom: '1.25rem' }}>
-                <Brain size={24} color="var(--color-cta)" />
-                <h3 style={{ margin: 0, color: 'white', textTransform: 'uppercase' }}>Our Technology</h3>
+              <div style={{ 
+                display: 'inline-flex', alignItems: 'center', justifyContent: 'center', width: '64px', height: '64px',
+                borderRadius: '18px', background: 'linear-gradient(135deg, rgba(20, 184, 166, 0.15) 0%, rgba(20, 184, 166, 0.05) 100%)',
+                border: '1px solid rgba(20, 184, 166, 0.3)', boxShadow: 'inset 0 0 20px rgba(20, 184, 166, 0.1), 0 8px 16px rgba(0, 0, 0, 0.2)',
+                marginBottom: '2rem'
+              }}>
+                <Cpu size={32} color="var(--color-cta)" strokeWidth={2} />
               </div>
-              <p style={{ color: 'rgba(255, 255, 255, 0.85)', lineHeight: 1.6, fontSize: '1.05rem' }}>
+              <h3 style={{ fontSize: '1.5rem', marginBottom: '1rem', letterSpacing: '0.02em', textShadow: '0 2px 10px rgba(0,0,0,0.5)' }}>Our Technology</h3>
+              <p style={{ color: 'var(--text)', fontSize: '1.05rem', lineHeight: '1.8', opacity: 0.9 }}>
                 Single-use neurostimulation patches that enhance cognition and sensory processing while worn on the neck. Hands-free, maintenance-free, safe, and comfortable.
               </p>
             </motion.div>
             
             {/* Card 2: The Science */}
-            <motion.div className="bento-card" variants={staggerItem} style={{ 
-              gridColumn: 'span 4',
-              background: 'linear-gradient(180deg, rgba(30, 41, 59, 0.95) 0%, rgba(15, 23, 42, 0.98) 100%)',
-              backdropFilter: 'blur(24px)'
+            <motion.div variants={staggerItem} style={{ 
+              background: 'linear-gradient(145deg, rgba(30, 41, 59, 0.7) 0%, rgba(15, 23, 42, 0.95) 100%)',
+              backdropFilter: 'blur(24px)',
+              border: '1px solid rgba(255, 255, 255, 0.08)',
+              borderTop: '1px solid rgba(255, 255, 255, 0.15)',
+              borderRadius: '1.5rem',
+              padding: '3rem 2.5rem',
+              boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 24px 38px -10px rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.1)'
             }}>
-              <div style={{ display: 'flex', alignItems: 'center', gap: '1rem', marginBottom: '1.25rem' }}>
-                <Shield size={24} color="#60A5FA" />
-                <h3 style={{ margin: 0, color: 'white', textTransform: 'uppercase' }}>The Science</h3>
+              <div style={{ 
+                display: 'inline-flex', alignItems: 'center', justifyContent: 'center', width: '64px', height: '64px',
+                borderRadius: '18px', background: 'linear-gradient(135deg, rgba(20, 184, 166, 0.15) 0%, rgba(20, 184, 166, 0.05) 100%)',
+                border: '1px solid rgba(20, 184, 166, 0.3)', boxShadow: 'inset 0 0 20px rgba(20, 184, 166, 0.1), 0 8px 16px rgba(0, 0, 0, 0.2)',
+                marginBottom: '2rem'
+              }}>
+                <Activity size={32} color="var(--color-cta)" strokeWidth={2} />
               </div>
-              <p style={{ color: 'rgba(255, 255, 255, 0.85)', lineHeight: 1.6, fontSize: '1.05rem' }}>
+              <h3 style={{ fontSize: '1.5rem', marginBottom: '1rem', letterSpacing: '0.02em', textShadow: '0 2px 10px rgba(0,0,0,0.5)' }}>The Science</h3>
+              <p style={{ color: 'var(--text)', fontSize: '1.05rem', lineHeight: '1.8', opacity: 0.9 }}>
                 The Sharper Sense patch delivers an electric field that noninvasively stimulates nerves in your neck. These nerves project to the brain and primarily causes release of norepinephrine, which enhances cognition and sensory processing.
               </p>
             </motion.div>
             
             {/* Card 3: Applications */}
-            <motion.div className="bento-card" variants={staggerItem} style={{ 
-              gridColumn: 'span 4',
-              background: 'linear-gradient(180deg, rgba(30, 41, 59, 0.95) 0%, rgba(15, 23, 42, 0.98) 100%)',
-              backdropFilter: 'blur(24px)'
+            <motion.div variants={staggerItem} style={{ 
+              background: 'linear-gradient(145deg, rgba(30, 41, 59, 0.7) 0%, rgba(15, 23, 42, 0.95) 100%)',
+              backdropFilter: 'blur(24px)',
+              border: '1px solid rgba(255, 255, 255, 0.08)',
+              borderTop: '1px solid rgba(255, 255, 255, 0.15)',
+              borderRadius: '1.5rem',
+              padding: '3rem 2.5rem',
+              boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 24px 38px -10px rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.1)'
             }}>
-              <div style={{ display: 'flex', alignItems: 'center', gap: '1rem', marginBottom: '1.25rem' }}>
-                <Activity size={24} color="#C084FC" />
-                <h3 style={{ margin: 0, color: 'white', textTransform: 'uppercase' }}>Applications</h3>
+              <div style={{ 
+                display: 'inline-flex', alignItems: 'center', justifyContent: 'center', width: '64px', height: '64px',
+                borderRadius: '18px', background: 'linear-gradient(135deg, rgba(20, 184, 166, 0.15) 0%, rgba(20, 184, 166, 0.05) 100%)',
+                border: '1px solid rgba(20, 184, 166, 0.3)', boxShadow: 'inset 0 0 20px rgba(20, 184, 166, 0.1), 0 8px 16px rgba(0, 0, 0, 0.2)',
+                marginBottom: '2rem'
+              }}>
+                <Zap size={32} color="var(--color-cta)" strokeWidth={2} />
               </div>
-              <p style={{ color: 'rgba(255, 255, 255, 0.85)', lineHeight: 1.6, fontSize: '1.05rem' }}>
+              <h3 style={{ fontSize: '1.5rem', marginBottom: '1rem', letterSpacing: '0.02em', textShadow: '0 2px 10px rgba(0,0,0,0.5)' }}>Applications</h3>
+              <p style={{ color: 'var(--text)', fontSize: '1.05rem', lineHeight: '1.8', opacity: 0.9 }}>
                 Fatigue and distractions impair sensory processing increasing risk of human error and injury. Sharper Sense provides clarity when it counts towards safety and success. Users in military, sports, first responders, shift workers, students, and older adults.
               </p>
             </motion.div>
@@ -257,40 +284,37 @@ const Home = () => {
           </div>
           <motion.div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(260px, 1fr))', gap: '2rem' }} variants={staggerContainer} initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-50px" }}>
             {teamData.map(member => (
-              <motion.div key={member.id} variants={staggerItem} className="bento-card" style={{ 
-                textAlign: 'center',
-                background: 'linear-gradient(180deg, rgba(30, 41, 59, 0.7) 0%, rgba(15, 23, 42, 0.9) 100%)',
-                backdropFilter: 'blur(16px)',
-                padding: '2.5rem 1.5rem',
+              <motion.div key={member.id} variants={staggerItem} style={{ 
                 display: 'flex',
-                flexDirection: 'column',
+                flexDirection: 'row',
                 alignItems: 'center',
-                transition: 'transform 0.3s ease, box-shadow 0.3s ease'
-              }}
-              onMouseEnter={(e) => {
-                e.currentTarget.style.transform = 'translateY(-5px)';
-                e.currentTarget.style.boxShadow = '0 10px 30px -10px rgba(20, 184, 166, 0.3)';
-              }}
-              onMouseLeave={(e) => {
-                e.currentTarget.style.transform = 'translateY(0)';
-                e.currentTarget.style.boxShadow = 'none';
-              }}
-              >
+                textAlign: 'left',
+                padding: '1.5rem',
+                background: 'linear-gradient(145deg, rgba(30, 41, 59, 0.7) 0%, rgba(15, 23, 42, 0.95) 100%)',
+                backdropFilter: 'blur(24px)',
+                border: '1px solid rgba(255, 255, 255, 0.08)',
+                borderTop: '1px solid rgba(255, 255, 255, 0.15)',
+                borderRadius: '1.5rem',
+                boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 24px 38px -10px rgba(0, 0, 0, 0.5)'
+              }}>
                 <div style={{ 
-                  width: '120px', 
-                  height: '120px', 
+                  width: '80px', 
+                  height: '80px', 
+                  flexShrink: 0,
                   borderRadius: '50%', 
                   overflow: 'hidden',
-                  marginBottom: '1.5rem',
+                  marginRight: '1.25rem',
                   border: '2px solid rgba(20, 184, 166, 0.3)',
                   boxShadow: '0 0 20px rgba(20, 184, 166, 0.15)',
-                  padding: '4px',
+                  padding: '3px',
                   background: 'var(--surface)'
                 }}>
                   <img src={member.image} alt={member.name} style={{ width: '100%', height: '100%', objectFit: 'cover', borderRadius: '50%' }} />
                 </div>
-                <h3 style={{ fontSize: '1.25rem', marginBottom: '0.25rem', color: 'white' }}>{member.name}</h3>
-                <p style={{ fontSize: '0.875rem', color: 'var(--color-cta)', fontWeight: '600', letterSpacing: '0.5px', textTransform: 'uppercase' }}>{member.title}</p>
+                <div style={{ display: 'flex', flexDirection: 'column' }}>
+                  <h3 style={{ fontSize: '1.125rem', marginBottom: '0.25rem', color: 'white' }}>{member.name}</h3>
+                  <p style={{ fontSize: '0.875rem', color: 'var(--color-cta)', fontWeight: '600', letterSpacing: '0.5px', textTransform: 'uppercase', margin: 0 }}>{member.title}</p>
+                </div>
               </motion.div>
             ))}
           </motion.div>
@@ -334,7 +358,7 @@ const Home = () => {
             <span className="text-overline">Testimonials</span>
             <h2 style={{ color: 'var(--text-h)' }}>What People Are Saying</h2>
           </div>
-          <motion.div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '2rem' }} variants={staggerContainer} initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-50px" }}>
+          <motion.div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '2rem' }} variants={staggerContainer} initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-50px" }}>
             {[
               {
                 id: 1,
@@ -388,11 +412,13 @@ const Home = () => {
 
         <div className="container" style={{ position: 'relative', zIndex: 1 }}>
           <motion.div className="responsive-grid-2" style={{
-            background: 'var(--surface)',
-            borderRadius: 'var(--radius-lg)',
-            padding: '4rem',
-            border: '1px solid var(--border)',
-            boxShadow: 'var(--shadow)',
+            background: 'linear-gradient(145deg, rgba(30, 41, 59, 0.7) 0%, rgba(15, 23, 42, 0.95) 100%)',
+            backdropFilter: 'blur(24px)',
+            borderRadius: '1.5rem',
+            padding: '2rem',
+            border: '1px solid rgba(255, 255, 255, 0.08)',
+            borderTop: '1px solid rgba(255, 255, 255, 0.15)',
+            boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 24px 38px -10px rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.1)',
             maxWidth: '1000px',
             marginInline: 'auto'
           }} {...fadeUp}>
