@@ -11,8 +11,7 @@ const Careers = () => {
         </p>
 
         <div className="bento-card" style={{ 
-          maxWidth: '800px',
-          margin: '0 auto',
+          width: '100%',
           border: '1px dashed rgba(255,255,255,0.1)'
         }}>
           <h3 style={{ fontSize: '1.25rem', marginBottom: '1rem', color: 'var(--color-text)' }}>

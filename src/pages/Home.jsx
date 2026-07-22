@@ -39,18 +39,15 @@ const Home = () => {
         display: 'flex', 
         alignItems: 'center', 
         justifyContent: 'center',
-        padding: 'clamp(1rem, 4vw, 2rem)'
       }}>
         <NeuralNetwork />
         
         <div
-          className="responsive-grid-2"
+          className="container responsive-grid-2"
           style={{
             position: 'relative',
             zIndex: 1,
             pointerEvents: 'none',
-            maxWidth: '1200px',
-            width: '100%',
           }}>
           <motion.div {...fadeLeft}>
             <h1 style={{ 
@@ -279,7 +276,7 @@ const Home = () => {
             <span className="text-overline">Leadership</span>
             <h2 style={{ color: 'var(--text-h)' }}>Meet the Team</h2>
           </div>
-          <motion.div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(260px, 1fr))', gap: '2rem' }} variants={staggerContainer} initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-50px" }}>
+          <motion.div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(min(260px, 100%), 1fr))', gap: '2rem' }} variants={staggerContainer} initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-50px" }}>
             {teamData.map(member => (
               <motion.div key={member.id} variants={staggerItem} style={{ 
                 display: 'flex',
@@ -415,9 +412,7 @@ const Home = () => {
             padding: '2rem',
             border: '1px solid rgba(255, 255, 255, 0.08)',
             borderTop: '1px solid rgba(255, 255, 255, 0.15)',
-            boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 24px 38px -10px rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.1)',
-            maxWidth: '1000px',
-            marginInline: 'auto'
+            boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 24px 38px -10px rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.1)'
           }} {...fadeUp}>
             <div>
               <span className="text-overline" style={{ color: 'var(--color-cta)' }}>Beta Program</span>
@@ -561,7 +556,7 @@ const Home = () => {
 
         /* Pro UI Animations */
         .advisor-card {
-          width: 250px;
+          width: 220px;
           padding: 1.5rem;
           display: flex;
           flex-direction: column;
@@ -612,6 +607,23 @@ const Home = () => {
         }
         .testimonial-card:hover::before {
           opacity: 1;
+        }
+
+        /* Mobile responsive fixes */
+        @media (max-width: 600px) {
+          .testimonial-card {
+            padding: 1.5rem;
+          }
+          .advisor-card {
+            width: 180px;
+            padding: 1rem;
+          }
+        }
+
+        /* Prevent marquee overflow from breaking layout */
+        .marquee-container {
+          max-width: 100vw;
+          overflow: hidden;
         }
       `}</style>
     </div>

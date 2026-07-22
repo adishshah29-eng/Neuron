@@ -40,8 +40,28 @@ const ChatWidget = () => {
     sendMessage(prompt);
   };
 
-  // Responsive: detect mobile
-  const isMobile = typeof window !== 'undefined' && window.innerWidth < 768;
+  // Responsive: track viewport width reactively
+  const [isMobile, setIsMobile] = React.useState(
+    typeof window !== 'undefined' && window.innerWidth < 768
+  );
+
+  React.useEffect(() => {
+    const handleResize = () => setIsMobile(window.innerWidth < 768);
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+
+  // Prevent background scrolling when chat is open
+  React.useEffect(() => {
+    if (isOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = '';
+    }
+    return () => {
+      document.body.style.overflow = '';
+    };
+  }, [isOpen]);
 
   return (
     <>
@@ -146,14 +166,15 @@ const ChatWidget = () => {
                     bottom: 0,
                     left: 0,
                     right: 0,
-                    height: '70vh',
+                    height: '85svh',
+                    maxHeight: '600px',
                     borderRadius: '24px 24px 0 0',
                   }
                 : {
                     bottom: '5rem',
                     right: '1.5rem',
-                    width: '380px',
-                    height: '520px',
+                    width: 'min(380px, calc(100vw - 3rem))',
+                    height: 'min(520px, calc(100svh - 8rem))',
                     borderRadius: '20px',
                   }),
             }}

@@ -13,7 +13,7 @@ const Science = () => {
           </p>
         </div>
 
-        <div style={{ display: 'flex', flexDirection: 'column', gap: '2.5rem', maxWidth: '800px', margin: '0 auto' }}>
+        <div style={{ display: 'flex', flexDirection: 'column', gap: '2.5rem', width: '100%' }}>
           {publicationsData.map(pub => (
             <div key={pub.id} className="bento-card">
               <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '0.5rem' }}>

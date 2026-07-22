@@ -147,6 +147,7 @@ const ChatMessages = ({ messages, isTyping }) => {
 
   return (
     <div
+      data-lenis-prevent="true"
       style={{
         flex: 1,
         overflowY: 'auto',
