@@ -320,7 +320,25 @@ const ParticleBrain = () => {
   const firingRef = useRef();
   const { camera } = useThree();
 
+  // Responsive camera FOV — keeps the full brain visible on all screen sizes
+  useEffect(() => {
+    const updateFov = () => {
+      const w = window.innerWidth;
+      let fov;
+      if (w <= 480) fov = 95;
+      else if (w <= 768) fov = 80;
+      else if (w <= 1024) fov = 68;
+      else fov = 60;
+      camera.fov = fov;
+      camera.updateProjectionMatrix();
+    };
+    updateFov();
+    window.addEventListener('resize', updateFov);
+    return () => window.removeEventListener('resize', updateFov);
+  }, [camera]);
+
   const [hovered, setHovered] = useState(false);
+
   const scrollProgress = useRef(0);
   const hoverProgress = useRef(0);
   const targetScatter = useRef(0);
